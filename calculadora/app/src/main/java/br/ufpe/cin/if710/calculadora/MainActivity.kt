@@ -2,12 +2,74 @@ package br.ufpe.cin.if710.calculadora
 
 import android.app.Activity
 import android.os.Bundle
+import android.widget.Button
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Digitos
+        val btn_0 = findViewById<Button>(R.id.btn_0)
+        btn_0.setOnClickListener { text_calc.text.append('0') }
+
+        val btn_1 = findViewById<Button>(R.id.btn_1)
+        btn_1.setOnClickListener { text_calc.text.append('1') }
+
+        val btn_2 = findViewById<Button>(R.id.btn_2)
+        btn_2.setOnClickListener { text_calc.text.append('2') }
+
+        val btn_3 = findViewById<Button>(R.id.btn_3)
+        btn_3.setOnClickListener { text_calc.text.append('3') }
+
+        val btn_4 = findViewById<Button>(R.id.btn_4)
+        btn_4.setOnClickListener { text_calc.text.append('4') }
+
+        val btn_5 = findViewById<Button>(R.id.btn_5)
+        btn_5.setOnClickListener { text_calc.text.append('5') }
+
+        val btn_6 = findViewById<Button>(R.id.btn_6)
+        btn_6.setOnClickListener { text_calc.text.append('6') }
+
+        val btn_7 = findViewById<Button>(R.id.btn_7)
+        btn_7.setOnClickListener { text_calc.text.append('7') }
+
+        val btn_8 = findViewById<Button>(R.id.btn_8)
+        btn_8.setOnClickListener { text_calc.text.append('8') }
+
+        val btn_9 = findViewById<Button>(R.id.btn_9)
+        btn_9.setOnClickListener { text_calc.text.append('9') }
+
+        //Simbolos
+        val btn_Divide = findViewById<Button>(R.id.btn_Divide)
+        btn_Divide.setOnClickListener { text_calc.text.append('/') }
+
+        val btn_Multiply = findViewById<Button>(R.id.btn_Multiply)
+        btn_Multiply.setOnClickListener { text_calc.text.append('*') }
+
+        val btn_Subtract = findViewById<Button>(R.id.btn_Subtract)
+        btn_Subtract.setOnClickListener { text_calc.text.append('-') }
+
+        val btn_Add = findViewById<Button>(R.id.btn_Add)
+        btn_Add.setOnClickListener { text_calc.text.append('+') }
+
+        val btn_LParen = findViewById<Button>(R.id.btn_LParen)
+        btn_LParen.setOnClickListener { text_calc.text.append('(') }
+
+        val btn_RParen = findViewById<Button>(R.id.btn_RParen)
+        btn_RParen.setOnClickListener { text_calc.text.append(')') }
+
+        val btn_Dot = findViewById<Button>(R.id.btn_Dot)
+        btn_Dot.setOnClickListener { text_calc.text.append('.') }
+
+        //val btn_Equal = findViewById(R.id.btn_Equal) as Button
+        //btn_Equal.setOnClickListener { text_calc.text.append('/') }
+
+        //val btn_Power = findViewById(R.id.btn_Power) as Button
+        //btn_Power.setOnClickListener { text_calc.text.append('*') }
+
     }
 
     //Como usar a função:
