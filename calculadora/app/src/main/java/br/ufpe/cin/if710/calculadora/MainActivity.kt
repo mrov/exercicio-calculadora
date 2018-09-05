@@ -3,6 +3,7 @@ package br.ufpe.cin.if710.calculadora
 import android.app.Activity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : Activity() {
@@ -11,7 +12,11 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Digitos
+        // Recuperando a configuração anterior
+        text_calc.setText(savedInstanceState?.getString("calc"))
+        text_info.setText(savedInstanceState?.getString("info"))
+
+        //Digitos, dando append do digito pressionado no text_calc
         val btn_0 = findViewById<Button>(R.id.btn_0)
         btn_0.setOnClickListener { text_calc.text.append('0') }
 
@@ -42,7 +47,7 @@ class MainActivity : Activity() {
         val btn_9 = findViewById<Button>(R.id.btn_9)
         btn_9.setOnClickListener { text_calc.text.append('9') }
 
-        //Simbolos
+        //Simbolos, mesma coisa, dando append
         val btn_Divide = findViewById<Button>(R.id.btn_Divide)
         btn_Divide.setOnClickListener { text_calc.text.append('/') }
 
@@ -64,11 +69,35 @@ class MainActivity : Activity() {
         val btn_Dot = findViewById<Button>(R.id.btn_Dot)
         btn_Dot.setOnClickListener { text_calc.text.append('.') }
 
-        //val btn_Equal = findViewById(R.id.btn_Equal) as Button
-        //btn_Equal.setOnClickListener { text_calc.text.append('/') }
+        // para o equal o callback do listener foi diferente
+        val btn_Equal = findViewById(R.id.btn_Equal) as Button
+        btn_Equal.setOnClickListener {
+            // Tentar aplicar eval no conteudo de text_calc
+            try {
+                // a saida do text_calc.text é um editable entao to string, e a saida do eval
+                // é um double entao toString dnovo
+                val result = eval(text_calc.text.toString()).toString()
+                text_info.setText(result);
+            // Se falhar solta um toast com o erro, e não trava a aplicação
+            } catch (err: Exception) {
+                Toast.makeText(applicationContext, err.message, Toast.LENGTH_LONG).show()
+            }
+        }
 
-        //val btn_Power = findViewById(R.id.btn_Power) as Button
-        //btn_Power.setOnClickListener { text_calc.text.append('*') }
+        // Limpando o conteudo do info e do calc
+        val btn_Clear = findViewById(R.id.btn_Clear) as Button
+        btn_Clear.setOnClickListener {
+            text_calc.text.clear();
+            text_info.setText("");
+        }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+
+        // salvando os dados do text_calc e text_info
+        outState?.putString("calc", text_calc.text.toString())
+        outState?.putString("info", text_info.text.toString())
 
     }
 
